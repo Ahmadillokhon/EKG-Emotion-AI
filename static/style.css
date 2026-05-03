@@ -1,0 +1,377 @@
+:root {
+    --bg-dark: #0a0f1a;
+    --card-bg: rgba(16, 25, 43, 0.6);
+    --border-color: rgba(0, 255, 255, 0.2);
+    --text-main: #e0f2fe;
+    --text-muted: #94a3b8;
+    --neon-cyan: #00ffff;
+    --neon-green: #39ff14;
+    --neon-purple: #b026ff;
+    --neon-red: #ff003c;
+    --glow-cyan: 0 0 10px rgba(0, 255, 255, 0.5), 0 0 20px rgba(0, 255, 255, 0.3);
+    --glow-green: 0 0 10px rgba(57, 255, 20, 0.5), 0 0 20px rgba(57, 255, 20, 0.3);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: radial-gradient(circle at center, #111a2e 0%, #05080f 100%);
+    color: var(--text-main);
+    font-family: 'Inter', sans-serif;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    /* SCROLL ISHLASHI UCHUN O'ZGARGAN QISM: */
+    overflow-y: auto; 
+    overflow-x: hidden;
+    padding: 20px 0; /* Tepa/pastdan joy qoldirish */
+}
+
+.dashboard-container {
+    width: 95%;
+    max-width: 1400px;
+    height: 90vh;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    position: relative;
+    z-index: 1;
+}
+
+/* Background floating particles or deep space effect */
+body::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: 
+        radial-gradient(circle at 15% 50%, rgba(0, 255, 255, 0.05) 0%, transparent 50%),
+        radial-gradient(circle at 85% 30%, rgba(176, 38, 255, 0.05) 0%, transparent 50%);
+    z-index: 0;
+    pointer-events: none;
+}
+
+.dashboard-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 30px;
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 15px;
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
+
+.dashboard-header h1 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.8rem;
+    letter-spacing: 2px;
+    color: var(--neon-cyan);
+    text-shadow: var(--glow-cyan);
+}
+
+.status-indicator {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: 'Orbitron', sans-serif;
+    font-weight: 600;
+    color: var(--neon-green);
+    letter-spacing: 1px;
+}
+
+.glow-dot {
+    width: 12px;
+    height: 12px;
+    background-color: var(--neon-green);
+    border-radius: 50%;
+    box-shadow: var(--glow-green);
+    animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+    0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(57, 255, 20, 0.7); }
+    70% { transform: scale(1); box-shadow: 0 0 0 10px rgba(57, 255, 20, 0); }
+    100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(57, 255, 20, 0); }
+}
+
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 20px;
+    flex: 1;
+}
+
+.card {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 20px;
+    padding: 25px;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.3s ease, border-color 0.3s ease;
+    animation: float 6s ease-in-out infinite;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    border-color: rgba(0, 255, 255, 0.5);
+    box-shadow: 0 15px 40px 0 rgba(0, 255, 255, 0.1);
+}
+
+@keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+    100% { transform: translateY(0px); }
+}
+
+/* Stagger floating animations */
+.card:nth-child(1) { animation-delay: 0s; }
+.card:nth-child(2) { animation-delay: 1s; }
+.card:nth-child(3) { animation-delay: 2s; }
+.card:nth-child(4) { animation-delay: 0.5s; }
+
+.main-card {
+    grid-column: 1 / 3;
+    grid-row: 1 / 3;
+    align-items: center;
+    justify-content: center;
+}
+
+.card-title {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.1rem;
+    color: var(--text-muted);
+    letter-spacing: 1.5px;
+    position: absolute;
+    top: 25px;
+    left: 25px;
+}
+
+/* Emotion Status */
+.emotion-display {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+
+.emotion-ring {
+    position: relative;
+    width: 350px;
+    height: 350px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.ring-svg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    transform: rotate(-90deg);
+}
+
+.ring-bg {
+    fill: none;
+    stroke: rgba(255, 255, 255, 0.05);
+    stroke-width: 12;
+}
+
+.ring-progress {
+    fill: none;
+    stroke: var(--neon-cyan);
+    stroke-width: 12;
+    stroke-linecap: round;
+    stroke-dasharray: 565;
+    stroke-dashoffset: 100;
+    transition: stroke-dashoffset 1s ease-in-out, stroke 0.5s ease;
+    filter: drop-shadow(0 0 8px var(--neon-cyan));
+}
+
+.emotion-text {
+    text-align: center;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.neon-text {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 3.5rem;
+    font-weight: 700;
+    color: var(--neon-cyan);
+    text-shadow: var(--glow-cyan);
+    transition: color 0.5s ease, text-shadow 0.5s ease;
+}
+
+.confidence-label {
+    font-size: 1rem;
+    color: var(--text-muted);
+    letter-spacing: 1px;
+}
+
+#emotion-confidence {
+    color: var(--text-main);
+    font-weight: 600;
+}
+
+/* Side Cards Styling */
+.side-card {
+    justify-content: center;
+    align-items: center;
+}
+
+.side-card .card-title {
+    position: static;
+    margin-bottom: auto;
+    align-self: flex-start;
+}
+
+.data-value {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 3rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+    text-shadow: 0 0 10px rgba(255,255,255,0.2);
+}
+
+.unit {
+    font-size: 1.2rem;
+    color: var(--text-muted);
+    margin-left: 5px;
+}
+
+.status-text {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+    margin-top: auto;
+    color: var(--neon-green);
+}
+
+/* ECG Animation */
+.ecg-container {
+    width: 100%;
+    height: 60px;
+    position: relative;
+    overflow: hidden;
+}
+
+/* CANVAS UCHUN QO'SHILGAN QISM: */
+#ecg-canvas {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+/* Bar Chart for RMSSD */
+.bar-chart {
+    width: 100%;
+    height: 15px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    overflow: hidden;
+    position: relative;
+    margin-bottom: 10px;
+}
+
+.bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--neon-cyan), var(--neon-purple));
+    border-radius: 10px;
+    box-shadow: 0 0 10px var(--neon-cyan);
+    transition: width 0.5s ease-in-out;
+}
+
+/* Hexagon for SDNN */
+.hexagon-container {
+    width: 80px;
+    height: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.hexagon {
+    width: 60px;
+    height: 34.64px;
+    background-color: transparent;
+    border-left: 2px solid var(--neon-purple);
+    border-right: 2px solid var(--neon-purple);
+    position: relative;
+    box-shadow: 0 0 15px rgba(176, 38, 255, 0.5) inset;
+    animation: spin 10s linear infinite;
+}
+
+.hexagon::before,
+.hexagon::after {
+    content: "";
+    position: absolute;
+    width: 42.42px;
+    height: 42.42px;
+    transform: scaleY(0.5774) rotate(-45deg);
+    background-color: inherit;
+    left: 6.79px;
+    box-shadow: inherit;
+}
+
+.hexagon::before {
+    top: -21.21px;
+    border-top: 2px solid var(--neon-purple);
+    border-right: 2px solid var(--neon-purple);
+}
+
+.hexagon::after {
+    bottom: -21.21px;
+    border-bottom: 2px solid var(--neon-purple);
+    border-left: 2px solid var(--neon-purple);
+}
+
+@keyframes spin {
+    100% { transform: rotate(360deg); }
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+    .dashboard-grid {
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: auto;
+    }
+    .main-card {
+        grid-column: 1 / 3;
+        grid-row: 1;
+        min-height: 400px;
+    }
+}
+
+@media (max-width: 768px) {
+    .dashboard-grid {
+        grid-template-columns: 1fr;
+    }
+    .main-card {
+        grid-column: 1;
+    }
+    .emotion-ring {
+        width: 250px;
+        height: 250px;
+    }
+}

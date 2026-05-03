@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <title>AI Emotsiya Tizimi</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <header class="dashboard-header">
+            <h1>AI EMOTSIYANI ANIQLASH</h1>
+            <div class="status-indicator">
+                <div class="glow-dot" id="status-dot"></div>
+                <span id="status-text">QURILMA KUTILMOQDA</span>
+            </div>
+        </header>
+
+        <main class="dashboard-grid">
+            <section class="card main-card">
+                <h2 class="card-title">JORIY HOLAT</h2>
+                <div class="emotion-display">
+                    <div class="emotion-ring">
+                        <svg class="ring-svg" viewBox="0 0 200 200">
+                            <circle class="ring-bg" cx="100" cy="100" r="90"></circle>
+                            <circle class="ring-progress" cx="100" cy="100" r="90"></circle>
+                        </svg>
+                        <div class="emotion-text">
+                            <span id="emotion-label" class="neon-text">---</span>
+                            <span class="confidence-label">ANIQLIK: <span id="emotion-confidence">0%</span></span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="card side-card">
+                <h3 class="card-title">YURAK URISHI (BPM)</h3>
+                <div class="data-value" id="bpm-value">0</div>
+                
+                <!-- O'ZGARGAN QISM: SVG O'RNIGA CANVAS QO'YILDI -->
+                <div class="ecg-container">
+                    <canvas id="ecg-canvas"></canvas>
+                </div>
+
+            </section>
+
+            <section class="card side-card">
+                <h3 class="card-title">STRESS (RMSSD)</h3>
+                <div class="data-value" id="rmssd-value">0<span class="unit">ms</span></div>
+                <div class="bar-chart"><div class="bar-fill" id="rmssd-bar" style="width: 0%;"></div></div>
+                <div class="status-text" id="rmssd-status">KUTILMOQDA</div>
+            </section>
+
+            <section class="card side-card">
+                <h3 class="card-title">BARQARORLIK (SDNN)</h3>
+                <div class="data-value" id="sdnn-value">0<span class="unit">ms</span></div>
+                <div class="hexagon-container"><div class="hexagon"></div></div>
+                <div class="status-text" id="sdnn-status">TAYYOR</div>
+            </section>
+        </main>
+    </div>
+    <script src="/static/script.js"></script>
+</body>
+</html>
