@@ -1,0 +1,7 @@
+fastapi
+uvicorn
+websockets
+joblib
+neurokit2
+scipy
+numpy
