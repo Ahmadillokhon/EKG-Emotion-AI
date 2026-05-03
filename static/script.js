@@ -58,7 +58,7 @@ document.addEventListener('DOMContentLoaded', () => {
     drawECG(); // Chizishni boshlash
 
     // === WEBSOCKET ALOQASI ===
-    const socket = new WebSocket("ws://localhost:8000/ws"); // Ngrok ishlatsangiz wss:// bilan almashtirasiz
+    const socket = new WebSocket("wss://ekg-emotion-ai.onrender.com/ws"); // Ngrok ishlatsangiz wss:// bilan almashtirasiz
 
     socket.onopen = () => {
         statusText.textContent = "ALOKA O'RNATILDI";
